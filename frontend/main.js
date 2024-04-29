@@ -1,42 +1,19 @@
-// Function to fetch visitor count from the API
-function getVisitorCount() {
-    fetch('https://<PYTHON_COUNTER_API_BASE_URL>/api/getvisitorcount', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Update the counter on the webpage
-        console.log('HEREEEE');
-        document.querySelector('.counter').textContent = data.count;
-  
-        // Call updateVisitorCount with the current count
-        updateVisitorCount();
-      })
-      .catch((error) => {
-        console.error('Error fetching visitor count:', error);
-      });
-  }
-  
-  // Function to update visitor count on the API
-  function updateVisitorCount() {
-    fetch('https://<PYTHON_COUNTER_API_BASE_URL>/api/updatevisitorcount', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({}),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Visitor count updated successfully:', data);
-      })
-      .catch((error) => {
-        console.error('Error updating visitor count:', error);
-      });
-  }
-  
-  // Fetch the visitor count and update on page load
-  document.addEventListener('DOMContentLoaded', getVisitorCount);
+window.addEventListener('DOMContentLoaded',(event) =>{
+    getVisitCount();
+})
+
+const functionApi = '';
+
+const getVisitCount = () => {
+    let count = 30;
+    fetch(functionApi).then(response => {
+        return response.json()
+    }).then(response =>{
+        console.log("Website called function API.");
+        count = response.count;
+        document.getElementById("counter").innerText = count;
+    }).catch(function(error){
+        console.log(error);
+    });
+    return count;
+}
